@@ -18,8 +18,8 @@ jobs:
 
       - name: Configure Maven settings
         run: |
-          mkdir -p /.m2
-          cat > /.m2/settings.xml <<EOF
+          mkdir -p $HOME/.m2
+          cat > $HOME/.m2/settings.xml <<EOF
           <settings>
             <servers>
               <server>
