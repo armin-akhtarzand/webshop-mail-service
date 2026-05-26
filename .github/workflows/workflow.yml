@@ -17,4 +17,6 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
-        run: mvn clean verify
+        run: mvn -B clean package
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
