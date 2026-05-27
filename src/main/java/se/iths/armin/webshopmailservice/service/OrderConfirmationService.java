@@ -1,30 +1,25 @@
 package se.iths.armin.webshopmailservice.service;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import se.iths.armin.mailservice.MailService;
 import se.iths.armin.webshopmailservice.message.OrderConfirmationMessage;
 
+
 @Service
-public class MailService {
+public class OrderConfirmationService {
 
-    private final JavaMailSender mailSender;
+    private final MailService mailService;
 
-    @Value("${spring.mail.username}")
-    private String from;
-
-    public MailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
+    public OrderConfirmationService(MailService mailService) {
+        this.mailService = mailService;
     }
 
     public void sendOrderConfirmation(OrderConfirmationMessage message) {
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setFrom(from);
-        email.setTo(message.getCustomerEmail());
-        email.setSubject("Order Confirmation");
-        email.setText(buildEmailText(message));
-        mailSender.send(email);
+        mailService.sendMail(
+                message.getCustomerEmail(),
+                "Order Confirmation",
+                buildEmailText(message)
+        );
     }
 
     private String buildEmailText(OrderConfirmationMessage message) {
