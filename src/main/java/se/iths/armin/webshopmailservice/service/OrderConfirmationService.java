@@ -33,6 +33,12 @@ public class OrderConfirmationService {
                         .append(" = ").append(item.getPrice()).append("\n")
         );
         sb.append("\nTotal: ").append(message.getTotalPrice());
+
+
+        System.out.println("=== ORDER CONFIRMATION ===");
+        System.out.println(sb);
+        System.out.println("==========================");
+        
         return sb.toString();
     }
 }
